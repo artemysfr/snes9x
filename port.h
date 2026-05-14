@@ -101,8 +101,8 @@ typedef long			int16_32;
 /* #define ZeroMemory(a,b) memset((a),0,(b)) */
 #define ZeroMemory(a,b) \
 { \
-	register uint32 *jj = ((uint32 *)(a)); \
-	for(register uint32 ii=(b)/8; ii ; --ii) { \
+	uint32 *jj = ((uint32 *)(a)); \
+	for(uint32 ii=(b)/8; ii ; --ii) { \
 		*jj++ = 0; \
 		*jj++ = 0; \
 	} \

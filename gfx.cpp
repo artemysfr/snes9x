@@ -197,8 +197,8 @@ void DrawLargePixel16Sub1_2 (uint32 Tile, uint32 Offset,
 
 bool8_32 S9xGraphicsInit ()
 {
-    register uint32 PixelOdd = 1;
-    register uint32 PixelEven = 2;
+    uint32 PixelOdd = 1;
+    uint32 PixelEven = 2;
 
 #ifdef GFX_MULTI_FORMAT
     if (GFX.BuildPixel == NULL)
@@ -207,10 +207,10 @@ bool8_32 S9xGraphicsInit ()
 
     for (uint8 bitshift = 0; bitshift < 4; bitshift++)
     {
-	for (register char i = 0; i < 16; i++)
+	for (char i = 0; i < 16; i++)
 	{
-	    register uint32 h = 0;
-	    register uint32 l = 0;
+	    uint32 h = 0;
+	    uint32 l = 0;
 
 #if defined(LSB_FIRST)
 	    if (i & 8)
@@ -518,9 +518,9 @@ void S9xGraphicsDeinit (void)
 
 void S9xBuildDirectColourMaps ()
 {
-    for (register uint32 p = 0; p < 8; p++)
+    for (uint32 p = 0; p < 8; p++)
     {
-	for (register uint32 c = 0; c < 256; c++)
+	for (uint32 c = 0; c < 256; c++)
 	{
 // XXX: Brightness
 		 DirectColourMaps [p][c] = ((int)(((c & 7) << 2) | ((p & 1) << 1) << 11)) | 
@@ -2903,11 +2903,11 @@ void DrawBGMode7Background16Sub1_2 (uint8 *Screen, int bg)
 
 STATIC uint32 Q_INTERPOLATE(uint32 A, uint32 B, uint32 C, uint32 D)
 {
-    register uint32 x = ((A >> 2) & HIGH_BITS_SHIFTED_TWO_MASK) +
+    uint32 x = ((A >> 2) & HIGH_BITS_SHIFTED_TWO_MASK) +
                             ((B >> 2) & HIGH_BITS_SHIFTED_TWO_MASK) +
                             ((C >> 2) & HIGH_BITS_SHIFTED_TWO_MASK) +
                             ((D >> 2) & HIGH_BITS_SHIFTED_TWO_MASK);
-    register uint32 y = (A & TWO_LOW_BITS_MASK) +
+    uint32 y = (A & TWO_LOW_BITS_MASK) +
                             (B & TWO_LOW_BITS_MASK) +
                             (C & TWO_LOW_BITS_MASK) +
                             (D & TWO_LOW_BITS_MASK);
@@ -3485,7 +3485,7 @@ void S9xUpdateScreen () // ~30-50ms! (called from FLUSH_REDRAW())
 			// 'underneath' to show through.
 
 			uint32 b = gfx->FixedColour | (gfx->FixedColour << 16);
-			register uint32 *p = (uint32 *) (gfx->SubScreen + y * gfx->Pitch2);
+			uint32 *p = (uint32 *) (gfx->SubScreen + y * gfx->Pitch2);
 			uint32 *q = (uint32 *) ((uint16 *) p + ippu->RenderedScreenWidth);
 
 			while (p < q) {
@@ -3545,7 +3545,7 @@ void S9xUpdateScreen () // ~30-50ms! (called from FLUSH_REDRAW())
 		    // For now just clear all of the scanlines
 		    for (uint32 y = starty; y <= endy; y++)
             {
-                register uint32 *p = (uint32 *) (gfx->Screen + y * gfx->Pitch2);
+                uint32 *p = (uint32 *) (gfx->Screen + y * gfx->Pitch2);
                 uint32 *q = (uint32 *) ((uint16 *) p + ippu->RenderedScreenWidth);
 
                 while (p < q) {
@@ -3587,10 +3587,10 @@ void S9xUpdateScreen () // ~30-50ms! (called from FLUSH_REDRAW())
 			if (gfx->r2131 & 0x80) {
 			    if (gfx->r2131 & 0x40) {
 					// Subtract, halving the result.
-					register uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2) + Left;
-					register uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
-					register uint8 *s = gfx->SubZBuffer + y * gfx->ZPitch + Left;
-					register uint8 *e = d + Right;
+					uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2) + Left;
+					uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
+					uint8 *s = gfx->SubZBuffer + y * gfx->ZPitch + Left;
+					uint8 *e = d + Right;
 					uint16 back_fixed = COLOR_SUB (back, gfx->FixedColour);
 
 					d += Left;
@@ -3610,10 +3610,10 @@ void S9xUpdateScreen () // ~30-50ms! (called from FLUSH_REDRAW())
 					}
 			    } else {
 					// Subtract
-					register uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2) + Left;
-					register uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
-					register uint8 *s = gfx->SubZBuffer + y * gfx->ZPitch + Left;
-					register uint8 *e = d + Right;
+					uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2) + Left;
+					uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
+					uint8 *s = gfx->SubZBuffer + y * gfx->ZPitch + Left;
+					uint8 *e = d + Right;
 					uint16 back_fixed = COLOR_SUB (back, gfx->FixedColour);
 
 					d += Left;
@@ -3634,10 +3634,10 @@ void S9xUpdateScreen () // ~30-50ms! (called from FLUSH_REDRAW())
 			    }
 			} else
 			if (gfx->r2131 & 0x40) {
-				register uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2) + Left;
-				register uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
-				register uint8 *s = gfx->SubZBuffer + y * gfx->ZPitch + Left;
-				register uint8 *e = d + Right;
+				uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2) + Left;
+				uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
+				uint8 *s = gfx->SubZBuffer + y * gfx->ZPitch + Left;
+				uint8 *e = d + Right;
 			    uint16 back_fixed = COLOR_ADD (back, gfx->FixedColour);
 
 			    d += Left;
@@ -3659,10 +3659,10 @@ void S9xUpdateScreen () // ~30-50ms! (called from FLUSH_REDRAW())
 			else
 			if (back != 0)
 			{
-				register uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2) + Left;
-				register uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
-				register uint8 *s = gfx->SubZBuffer + y * gfx->ZPitch + Left;
-				register uint8 *e = d + Right;
+				uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2) + Left;
+				uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
+				uint8 *s = gfx->SubZBuffer + y * gfx->ZPitch + Left;
+				uint8 *e = d + Right;
 			    uint16 back_fixed = COLOR_ADD (back, gfx->FixedColour);
 
 			    d += Left;
@@ -3688,10 +3688,10 @@ void S9xUpdateScreen () // ~30-50ms! (called from FLUSH_REDRAW())
 					// copy the sub-screen to the main screen
 					// or fill it with the back-drop colour if the
 					// sub-screen is clear.
-					register uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2) + Left;
-					register uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
-					register uint8 *s = gfx->SubZBuffer + y * gfx->ZPitch + Left;
-					register uint8 *e = d + Right;
+					uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2) + Left;
+					uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
+					uint8 *s = gfx->SubZBuffer + y * gfx->ZPitch + Left;
+					uint8 *e = d + Right;
 
 					d += Left;
 					while (d < e) {
@@ -3723,9 +3723,9 @@ void S9xUpdateScreen () // ~30-50ms! (called from FLUSH_REDRAW())
 					for (uint32 b = 0; b < pClip->Count [5]; b++) {
 						uint32 Left = pClip->Left [b][5] * x2;
 						uint32 Right = pClip->Right [b][5] * x2;
-						register uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2) + Left;
-						register uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
-						register uint8 *e = d + Right;
+						uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2) + Left;
+						uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
+						uint8 *e = d + Right;
 						d += Left;
 
 						while (d < e) {
@@ -3737,9 +3737,9 @@ void S9xUpdateScreen () // ~30-50ms! (called from FLUSH_REDRAW())
 				}
 			} else {
 				for (uint32 y = starty; y <= endy; y++) {
-					register uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2);
-					register uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
-					register uint8 *e = d + 256 * x2;
+					uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2);
+					uint8 *d = gfx->ZBuffer + y * gfx->ZPitch;
+					uint8 *e = d + 256 * x2;
 
 					while (d < e) {
 						if (*d++ == 0)
@@ -3760,7 +3760,7 @@ void S9xUpdateScreen () // ~30-50ms! (called from FLUSH_REDRAW())
 			back = black;
 	    if (ippu->Clip [0].Count[5]) {
 			for (uint32 y = starty; y <= endy; y++) {
-				register uint32 *p = (uint32 *) (gfx->Screen + y * gfx->Pitch2);
+				uint32 *p = (uint32 *) (gfx->Screen + y * gfx->Pitch2);
 				uint32 *q = (uint32 *) ((uint16 *) p + ippu->RenderedScreenWidth);
 
 				while (p < q) {
@@ -3772,7 +3772,7 @@ void S9xUpdateScreen () // ~30-50ms! (called from FLUSH_REDRAW())
 
 				for (uint32 c = 0; c < ippu->Clip [0].Count [5]; c++) {
 					if (ippu->Clip [0].Right [c][5] > ippu->Clip [0].Left [c][5]) {
-						register uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2);
+						uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch2);
 						uint16 *q = p + ippu->Clip [0].Right [c][5] * x2;
 						p += ippu->Clip [0].Left [c][5] * x2;
 
@@ -3787,7 +3787,7 @@ void S9xUpdateScreen () // ~30-50ms! (called from FLUSH_REDRAW())
 			}
 	    } else {
 			for (uint32 y = starty; y <= endy; y++) {
-				register uint32 *p = (uint32 *) (gfx->Screen + y * gfx->Pitch2);
+				uint32 *p = (uint32 *) (gfx->Screen + y * gfx->Pitch2);
 				uint32 *q = (uint32 *) ((uint16 *) p + ippu->RenderedScreenWidth);
 				while (p < q) {
 					*p++ = back;
@@ -3821,7 +3821,7 @@ void S9xUpdateScreen () // ~30-50ms! (called from FLUSH_REDRAW())
 		}
 	    for (uint32 y = starty; y <= endy; y++)
 	    {
-			register uint32 *p = (uint32 *) (gfx->Screen + y * gfx->Pitch2);
+			uint32 *p = (uint32 *) (gfx->Screen + y * gfx->Pitch2);
 			uint32 *q = (uint32 *) ((uint16 *) p + ippu->RenderedScreenWidth);
 			while (p < q) {
 				*p++ = back;
@@ -3973,22 +3973,22 @@ else \
 		if (Settings.SixteenBit)
 	    {
 #endif
-		for (register uint32 y = gfx->StartY; y <= gfx->EndY; y++)
+		for (uint32 y = gfx->StartY; y <= gfx->EndY; y++)
 		{
-		    register uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch) + 255;
-		    register uint16 *q = (uint16 *) (gfx->Screen + y * gfx->Pitch) + 510;
-		    for (register int x = 255; x >= 0; x--, p--, q -= 2)
+		    uint16 *p = (uint16 *) (gfx->Screen + y * gfx->Pitch) + 255;
+		    uint16 *q = (uint16 *) (gfx->Screen + y * gfx->Pitch) + 510;
+		    for (int x = 255; x >= 0; x--, p--, q -= 2)
 			*q = *(q + 1) = *p;
 		}
 #ifndef _ZAURUS
 	    }
 	    else
 	    {
-		for (register uint32 y = gfx->StartY; y <= gfx->EndY; y++)
+		for (uint32 y = gfx->StartY; y <= gfx->EndY; y++)
 		{
-		    register uint8 *p = gfx->Screen + y * gfx->Pitch + 255;
-		    register uint8 *q = gfx->Screen + y * gfx->Pitch + 510;
-		    for (register int x = 255; x >= 0; x--, p--, q -= 2)
+		    uint8 *p = gfx->Screen + y * gfx->Pitch + 255;
+		    uint8 *q = gfx->Screen + y * gfx->Pitch + 510;
+		    for (int x = 255; x >= 0; x--, p--, q -= 2)
 			*q = *(q + 1) = *p;
 		}
 	    }

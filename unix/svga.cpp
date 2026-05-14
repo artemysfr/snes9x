@@ -44,7 +44,9 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifdef __x86_64__
 #include <sys/io.h>
+#endif
 #include <stdlib.h>
 #include <signal.h>
 
