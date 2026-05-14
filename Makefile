@@ -53,12 +53,12 @@ endif
 
 ifdef THREAD_SOUND
 CPUDEFINES += -DUSE_THREADS
-EXTRALIBS += -lpthread -L/usr/local/lib -lcygipc
+EXTRALIBS += -lpthread -lcygipc
 endif
 
 ifdef GLIDE
 GLIDEOBJS = unix/glide.o
-GLIDEDEFINES = -DUSE_GLIDE -I/usr/include/glide
+GLIDEDEFINES = -DUSE_GLIDE
 GLIDELIBS = -lglide2x
 GLIDEDEPENDS=use_glide
 GLIDENO_DEPENDS=no_glide
@@ -82,14 +82,12 @@ CCC = gcc
 CC = gcc
 NASM = nasm
 
-INCLUDES=-I/usr/local/include
+INCLUDES=
 
-OPTIMISE= -D_ZAURUS -Os -ffast-math -fstrict-aliasing -fomit-frame-pointer -mcpu=strongarm1100 -mtune=strongarm1100
+OPTIMISE= -D_ZAURUS -Os -ffast-math -fstrict-aliasing -fomit-frame-pointer
 CCFLAGS = $(OPTIMISE) \
--I/opt/Qtopia/include/SDL \
 -I. \
 -Iunzip \
--Isdl \
 -D__linux \
 -DZLIB \
 -DVAR_CYCLES \
@@ -114,7 +112,7 @@ CFLAGS=$(CCFLAGS)
 
 .SUFFIXES: .o .cpp .c .cc .h .m .i .S .asm .obj
 
-LDLIBS = -L/opt/Qtopia/sharp/lib
+LDLIBS=
 
 ifdef GLIDE
 all: offsets gsnes9x
@@ -146,7 +144,7 @@ $(OPENGLDEPENDS):
 	$(RM) $(OPENGLNO_DEPENDS)
 
 snes9x: $(OBJECTS) 
-	$(CCC) $(INCLUDES) -o $@ $(OBJECTS) $(EXTRALIBS) -L/opt/QtPalmtop/lib/ -lSDL -lSDLmain $(LDLIBS) -lqpe -lqte -lpthread
+	$(CC) $(INCLUDES) -o $@ $(OBJECTS) $(EXTRALIBS) $(LDLIBS) -lz -lpthread
 
 gsnes9x: $(OBJECTS) unix/x11.o unix/glide.o
 	$(CCC) $(INCLUDES) -o $@ $(OBJECTS) unix/x11.o unix/glide.o $(LDLIBS) $(GLIDELIBS) -lXext -lX11 -lXxf86dga -lXxf86vm $(EXTRALIBS) -lz -lm

@@ -54,6 +54,8 @@
 #include "sa1.h"
 //#include "netplay.h"
 
+struct SDSP1 DSP1;
+
 START_EXTERN_C
 char String[513];
 
@@ -72,8 +74,6 @@ struct SIAPU IAPU;
 struct SAPURegisters APURegisters;
 
 struct SSettings Settings;
-
-struct SDSP1 DSP1;
 
 struct SRegisters SA1Registers;
 //struct SSA1Registers SA1Registers;

@@ -48,7 +48,7 @@
 #include <stdlib.h>
 #include <signal.h>
 
-#include "sdl.h"
+#include <SDL.h>
 
 #include "snes9x.h"
 #include "memmap.h"

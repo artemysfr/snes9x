@@ -671,7 +671,7 @@ void FreezeStruct (STREAM stream, char *name, void *base, FreezeData *fields,
 						  fields [i].type);
     }
 
-    uint8 *block = new uint8 [len];
+    uint8 *block = (uint8*) malloc(len);
     uint8 *ptr = block;
     uint16 word;
     uint32 dword;
@@ -739,7 +739,7 @@ void FreezeStruct (STREAM stream, char *name, void *base, FreezeData *fields,
     }
 
     FreezeBlock (stream, name, block, len);
-    delete block;
+    free(block);
 }
 
 void FreezeBlock (STREAM stream, char *name, uint8 *block, int size)
@@ -767,7 +767,7 @@ int UnfreezeStruct (STREAM stream, char *name, void *base, FreezeData *fields,
 						  fields [i].type);
     }
 
-    uint8 *block = new uint8 [len];
+    uint8 *block = (uint8*) malloc(len);
     uint8 *ptr = block;
     uint16 word;
     uint32 dword;
@@ -776,7 +776,7 @@ int UnfreezeStruct (STREAM stream, char *name, void *base, FreezeData *fields,
 
     if ((result = UnfreezeBlock (stream, name, block, len)) != SUCCESS)
     {
-	delete block;
+	free(block);
 	return (result);
     }
 
@@ -841,7 +841,7 @@ int UnfreezeStruct (STREAM stream, char *name, void *base, FreezeData *fields,
 	}
     }
 
-    delete block;
+    free(block);
     return (result);
 }
 
@@ -865,9 +865,9 @@ int UnfreezeBlock (STREAM stream, char *name, uint8 *block, int size)
 
     if (rem)
     {
-	char *junk = new char [rem];
+	char *junk = (char*) malloc(rem);
 	READ_STREAM (junk, rem, stream);
-	delete junk;
+	free(junk);
     }
 	
     return (SUCCESS);

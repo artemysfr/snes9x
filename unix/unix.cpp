@@ -50,7 +50,7 @@
 #include <sys/types.h>
 #include <ctype.h>
 #include <dirent.h>
-#include <sdl.h>
+#include <SDL.h>
 #include "keydef.h"
 
 #undef USE_THREADS
@@ -189,8 +189,7 @@ void S9xParseArg (char **argv, int &i, int argc)
 }
 
 /*#include "cheats.h"*/
-extern "C"
-int SDL_main (int argc, char **argv)
+int main (int argc, char **argv)
 {
     if (argc < 2)
 	S9xUsage ();
