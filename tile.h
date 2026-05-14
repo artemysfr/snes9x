@@ -59,7 +59,7 @@
     if (BG.Buffered [TileNumber] == BLANK_TILE) \
 	return; \
 \
-    register uint32 l; \
+    uint32 l; \
     if (BG.DirectColourMode) \
     { \
 	if (IPPU.DirectColourMapsNeedRebuild) \

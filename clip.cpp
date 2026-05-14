@@ -130,9 +130,9 @@ void ComputeClipWindows ()
     {
         // Loop around the colour window then a clip window for each of the
         // background layers.
-	for (register int w = 5; w >= 0; w--)
+	for (int w = 5; w >= 0; w--)
 	{
-		register uint32 i;
+            uint32 i;
 	    pClip->Count[w] = 0;
 
 	    if (w == 5) // The colour window...

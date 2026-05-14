@@ -620,7 +620,7 @@ bool8_32 S9xInitUpdate ()
 
 bool8_32 S9xDeinitUpdate (int Width, int Height)
 {
-	register uint32 lp = (xs > 256) ? 16 : 0;
+	uint32 lp = (xs > 256) ? 16 : 0;
 
 	if (Width > 256 || vga)
 		lp *= 2;
@@ -628,17 +628,17 @@ bool8_32 S9xDeinitUpdate (int Width, int Height)
 // 	SDL_LockSurface(screen);
 	if (vga) {
 		if (Width > 256) {
-			for (register uint32 i = 0; i < Height; i++) {
-				register uint32 *dp32 = (uint32 *)(screen->pixels) + ((i + cl) * xs) + lp;
-				register uint32 *sp32 = (uint32 *)(GFX.Screen) + (i << 8) + cs;
-				for (register uint32 j = 0; j < 256; j++)
+			for (uint32 i = 0; i < Height; i++) {
+				uint32 *dp32 = (uint32 *)(screen->pixels) + ((i + cl) * xs) + lp;
+				uint32 *sp32 = (uint32 *)(GFX.Screen) + (i << 8) + cs;
+				for (uint32 j = 0; j < 256; j++)
 					*dp32++ = *sp32++;
 			}
 		} else {
-			for (register uint32 i = 0; i < Height; i++) {
-				register uint16 *dp16 = (uint16 *)(screen->pixels) + ((i + cl) * xs) * 2 + 64;
-				register uint16 *sp16 = (uint16 *)(GFX.Screen) + (i << 9) + cs;
-				for (register uint32 j = 0; j < 256; j++, dp16+=2, sp16++) {
+			for (uint32 i = 0; i < Height; i++) {
+				uint16 *dp16 = (uint16 *)(screen->pixels) + ((i + cl) * xs) * 2 + 64;
+				uint16 *sp16 = (uint16 *)(GFX.Screen) + (i << 9) + cs;
+				for (uint32 j = 0; j < 256; j++, dp16+=2, sp16++) {
 					*dp16 = *(dp16+1) = *sp16;
 				}
 			}
@@ -656,18 +656,18 @@ bool8_32 S9xDeinitUpdate (int Width, int Height)
 	} else {
 		if (Settings.SupportHiRes) {
 			if (Width > 256) {
-				for (register uint32 i = 0; i < Height; i++) {
-					register uint16 *dp16 = (uint16 *)(screen->pixels) + ((i + cl) * xs) + lp;
-					register uint32 *sp32 = (uint32 *)(GFX.Screen) + (i << 8) + cs;
-					for (register uint32 j = 0; j < 256; j++) {
+				for (uint32 i = 0; i < Height; i++) {
+					uint16 *dp16 = (uint16 *)(screen->pixels) + ((i + cl) * xs) + lp;
+					uint32 *sp32 = (uint32 *)(GFX.Screen) + (i << 8) + cs;
+					for (uint32 j = 0; j < 256; j++) {
 						*dp16++ = *sp32++;
 					}
 				}
 			} else {
-				for (register uint32 i = 0; i < Height; i++) {
-					register uint32 *dp32 = (uint32 *)(screen->pixels) + ((i + cl) * xs / 2) + lp;
-					register uint32 *sp32 = (uint32 *)(GFX.Screen) + (i << 8) + cs;
-					for (register uint32 j = 0; j < 128; j++) {
+				for (uint32 i = 0; i < Height; i++) {
+					uint32 *dp32 = (uint32 *)(screen->pixels) + ((i + cl) * xs / 2) + lp;
+					uint32 *sp32 = (uint32 *)(GFX.Screen) + (i << 8) + cs;
+					for (uint32 j = 0; j < 128; j++) {
 						*dp32++ = *sp32++;
 					}
 				}
