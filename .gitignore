@@ -23,7 +23,6 @@
 *.dll
 *.so.*
 
-
 # Fortran module files
 *.mod
 *.smod
@@ -38,19 +37,12 @@
 *.exe
 *.out
 *.app
+snes9x
 
 # Build directories
 build/
 Build/
 build-*/
-
-# CMake generated files
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-Makefile
-install_manifest.txt
-compile_commands.json
 
 # Temporary files
 *.tmp
@@ -67,3 +59,8 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# ROMs
+*.smc
+*.sfc
+*.zip
