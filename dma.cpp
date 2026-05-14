@@ -813,7 +813,7 @@ void S9xStartHDMA ()
 	}
     ippu->HDMAStarted = TRUE;
 	
-    for (register uint32 i = 0; i < 8; i++)
+    for (uint32 i = 0; i < 8; i++)
     {
 		if (ippu->HDMA & (1 << i))
 		{
